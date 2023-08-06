@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "517002206928",
+    "project_id": "flex-c4201",
+    "storage_bucket": "flex-c4201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517002206928:android:c79b656e26c464a546c8d5",
+        "android_client_info": {
+          "package_name": "com.flexfitnesstestapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517002206928-59p7opeekn366bd7rfvs3g30bu1r3s25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flexfitnesstestapp",
+            "certificate_hash": "627cefb9cd09c7ad5f1cebeeb97d4f24346df369"
+          }
+        },
+        {
+          "client_id": "517002206928-q68ssjtd2qfmclvq9eopd3qqfpdmejl3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf4r7FnBXr0x5AFD7xVBknSzCuaUYAYXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517002206928-8uhcn8ktr7351ps6g4hofo5l1dik79te.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
