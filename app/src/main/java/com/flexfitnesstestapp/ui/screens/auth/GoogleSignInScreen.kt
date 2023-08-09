@@ -1,6 +1,7 @@
 package com.flexfitnesstestapp.ui.screens.auth
 
 import android.app.Activity.RESULT_OK
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -14,11 +15,15 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -26,15 +31,23 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.flexfitnesstestapp.R
+import com.flexfitnesstestapp.data.datasource.remote.Resource
+import com.flexfitnesstestapp.navigation.Screen
+import com.flexfitnesstestapp.ui.component.CircularIndeterminateProgressBar
 import com.flexfitnesstestapp.ui.component.GoogleSignInButton
 import com.flexfitnesstestapp.ui.component.background.AnimatedBackground
+import com.flexfitnesstestapp.ui.component.topbar.AppBarState
 import timber.log.Timber
 
 @Composable
 internal fun GoogleSignInScreen(
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel,
+    navController: NavHostController,
+    onAppBarState: (AppBarState) -> Unit
 ) {
+    val loginFlow = authViewModel.loginFlow.collectAsState()
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartIntentSenderForResult(),
@@ -51,22 +64,32 @@ internal fun GoogleSignInScreen(
         withStyle(style = SpanStyle(color = colorResource(id = R.color.common_light_grey))) {
             append(stringResource(id = R.string.login_screen_sign_in_policy_start_text) + " ")
         }
-        pushStringAnnotation(tag = "policy", annotation = "https://www.getflex.fitness/privacy-policy.html")
+        pushStringAnnotation(
+            tag = "policy",
+            annotation = "https://www.getflex.fitness/privacy-policy.html"
+        )
         withStyle(style = SpanStyle(color = Color.Black)) {
             append(stringResource(id = R.string.login_screen_sign_in_privacy_policy))
         }
         pop()
 
         withStyle(style = SpanStyle(color = colorResource(id = R.color.common_light_grey))) {
-            append(" "  + stringResource(id = R.string.login_screen_sign_in_policy_middle_text) + " ")
+            append(" " + stringResource(id = R.string.login_screen_sign_in_policy_middle_text) + " ")
         }
 
-        pushStringAnnotation(tag = "terms", annotation = "https://www.getflex.fitness/terms-of-use.html")
+        pushStringAnnotation(
+            tag = "terms",
+            annotation = "https://www.getflex.fitness/terms-of-use.html"
+        )
 
         withStyle(style = SpanStyle(color = Color.Black)) {
             append(stringResource(id = R.string.login_screen_sign_in_terms_of_use))
         }
         pop()
+    }
+
+    LaunchedEffect(Unit) {
+        onAppBarState(AppBarState())
     }
 
     Box(
@@ -79,7 +102,7 @@ internal fun GoogleSignInScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp, 0.dp),
+                .padding(dimensionResource(id = R.dimen.common_content_padding), 0.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
@@ -92,10 +115,11 @@ internal fun GoogleSignInScreen(
                 )
             )
             Spacer(modifier = Modifier.height(90.dp))
-            Text(text= stringResource(id = R.string.login_screen_sign_in_motto),
+            Text(
+                text = stringResource(id = R.string.login_screen_sign_in_motto),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.titleLarge,
-                )
+            )
         }
         Column(
             modifier = Modifier.align(Alignment.BottomCenter),
@@ -114,19 +138,50 @@ internal fun GoogleSignInScreen(
                 modifier = Modifier.padding(vertical = 12.dp),
                 style = MaterialTheme.typography.titleMedium
             )
-            ClickableText(text = annotatedString, style = MaterialTheme.typography.titleSmall, onClick = { offset ->
-                annotatedString.getStringAnnotations(tag = "policy", start = offset, end = offset).firstOrNull()?.let {
-                    Timber.tag("policy URL").d(it.item)
-                    uriHandler.openUri(it.item)
+            ClickableText(
+                text = annotatedString,
+                style = MaterialTheme.typography.titleSmall,
+                onClick = { offset ->
+                    annotatedString.getStringAnnotations(
+                        tag = "policy",
+                        start = offset,
+                        end = offset
+                    ).firstOrNull()?.let {
+                        Timber.tag("policy URL").d(it.item)
+                        uriHandler.openUri(it.item)
 
-                }
+                    }
 
-                annotatedString.getStringAnnotations(tag = "terms", start = offset, end = offset).firstOrNull()?.let {
-                    Timber.tag("terms URL").d(it.item)
-                    uriHandler.openUri(it.item)
-                }
-            })
+                    annotatedString.getStringAnnotations(
+                        tag = "terms",
+                        start = offset,
+                        end = offset
+                    ).firstOrNull()?.let {
+                        Timber.tag("terms URL").d(it.item)
+                        uriHandler.openUri(it.item)
+                    }
+                })
         }
+        loginFlow.value?.let {
+            when (it) {
+                is Resource.Failure -> {
+                    val context = LocalContext.current
+                    Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG)
+                        .show()
+                }
 
+                is Resource.Loading -> {
+                    CircularIndeterminateProgressBar(isDisplayed = true, verticalBias = 0f)
+                }
+
+                is Resource.Success -> {
+                    LaunchedEffect(Unit) {
+                        navController.navigate(Screen.AddProfileName.route) {
+                            popUpTo(Screen.Login.route) { inclusive = true }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

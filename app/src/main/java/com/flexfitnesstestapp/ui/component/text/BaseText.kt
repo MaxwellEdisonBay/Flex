@@ -5,59 +5,62 @@ import androidx.annotation.StringRes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import com.flexfitnesstestapp.R
 
 @Composable
-internal fun HeaderText(@StringRes textRes: Int) {
+internal fun BaseTitleHeader(@StringRes textRes: Int, textAlign: TextAlign = TextAlign.Start) {
     Text(
         text = stringResource(id = textRes),
-        color = colorResource(id = R.color.text_color),
-        style = MaterialTheme.typography.headlineLarge,
-        fontWeight = FontWeight.Medium,
-        textAlign = TextAlign.Start
+        style = MaterialTheme.typography.titleLarge,
+        fontSize = 32.sp,
+        textAlign = textAlign,
+        fontWeight = FontWeight.ExtraBold,
+        letterSpacing = 0.sp,
+        lineHeight = 34.sp
     )
 }
 
 @Composable
-internal fun ParagraphText(@StringRes textRes: Int, @ColorRes color: Int = R.color.text_color) {
+internal fun BaseSubTitleHeader(
+    @StringRes textRes: Int,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Start,
+    @ColorRes color: Int = R.color.common_light_grey
+) {
     Text(
         text = stringResource(id = textRes),
-        color = colorResource(id = color),
-        textAlign = TextAlign.Start
+        style = MaterialTheme.typography.titleMedium,
+        color = colorResource(
+            id = color
+        ),
+        textAlign = textAlign,
+        modifier = modifier,
+        fontWeight = FontWeight.Light,
+        fontSize = 16.sp,
+        letterSpacing = 1.sp
     )
 }
 
 @Composable
-internal fun ParagraphText(text: String, @ColorRes color: Int = R.color.text_color) {
-    Text(
-        text = text,
-        color = colorResource(id = color),
-        textAlign = TextAlign.Start
-    )
-}
-
-@Composable
-internal fun ParagraphTitleText(@StringRes textRes: Int, @ColorRes color: Int = R.color.text_color) {
+internal fun BaseBodyGreyText(
+    @StringRes textRes: Int,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Start,
+    @ColorRes color: Int = R.color.common_light_grey
+) {
     Text(
         text = stringResource(id = textRes),
-        color = colorResource(id = color),
-        style = MaterialTheme.typography.titleSmall,
-        textAlign = TextAlign.Start,
-        fontWeight = FontWeight.Bold,
-    )
-}
-
-@Composable
-internal fun ParagraphTitleText(text: String, @ColorRes color: Int = R.color.text_color, ) {
-    Text(
-        text = text,
-        color = colorResource(id = color),
-        style = MaterialTheme.typography.titleSmall,
-        textAlign = TextAlign.Start,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleMedium,
+        color = colorResource(
+            id = color
+        ),
+        textAlign = textAlign,
+        modifier = modifier
     )
 }

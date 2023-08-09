@@ -1,10 +1,5 @@
 package com.flexfitnesstestapp.utils
 
-internal class Constants {
-    companion object {
-        //Names
-        const val SIGN_IN_REQUEST = "signInRequest"
-        const val SIGN_UP_REQUEST = "signUpRequest"
 
-    }
-}
+const val ONBOARDING_PROGRESS_STEPS_NUM = 6
+const val ONBOARDING_PROGRESS_STEP = 1f / ONBOARDING_PROGRESS_STEPS_NUM

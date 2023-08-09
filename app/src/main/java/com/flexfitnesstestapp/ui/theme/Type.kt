@@ -14,10 +14,13 @@ val nunitoFamily = FontFamily(
     Font(R.font.nunito_font_regular, FontWeight.Normal),
     Font(R.font.nunito_font_bold, FontWeight.Bold),
     Font(R.font.nunito_font_extra_bold, FontWeight.ExtraBold),
+    Font(R.font.nunito_font_semi_bold, FontWeight.SemiBold),
+    Font(R.font.nunito_font_medium, FontWeight.Medium),
 
     // If you have a font like bold italic, you can add it like that
     //Font(R.font.MY_BOLD_ITALIC_FONT_NAME, FontWeight.Bold, FontStyle.Italic),
 )
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
@@ -51,6 +54,14 @@ val Typography = Typography(
         letterSpacing = 1.sp,
         textAlign = TextAlign.Center
     ),
+//    labelMedium = TextStyle(
+//        fontFamily = nunitoFamily,
+//        fontWeight = FontWeight.Normal,
+//        fontSize = 14.sp,
+//        lineHeight = 16.sp,
+//        letterSpacing = 0.sp,
+//        textAlign = TextAlign.Center
+//    ),
     /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,

@@ -126,4 +126,7 @@ dependencies {
 
     // squircle button shapes
     implementation("com.github.stoyan-vuchev:squircle-shape:1.0.3")
+
+    // Baloon tooltip UI library
+    implementation("com.github.skydoves:balloon-compose:1.5.4")
 }

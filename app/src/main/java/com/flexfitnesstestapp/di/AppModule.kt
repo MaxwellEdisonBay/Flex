@@ -8,11 +8,15 @@ import com.flexfitnesstestapp.data.repository.auth.FirebaseAuthRepository
 import com.flexfitnesstestapp.data.repository.auth.FirebaseAuthRepositoryImpl
 import com.flexfitnesstestapp.data.repository.firestore.FirebaseFirestoreRepository
 import com.flexfitnesstestapp.data.repository.firestore.FirebaseFirestoreRepositoryImpl
+import com.flexfitnesstestapp.data.repository.storage.FirebaseStorageRepository
+import com.flexfitnesstestapp.data.repository.storage.FirebaseStorageRepositoryImpl
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,13 +44,22 @@ internal class AppModule {
     ) = Identity.getSignInClient(context)
 
     @Provides
-    fun provideFirebaseAuthRepository(impl: FirebaseAuthRepositoryImpl): FirebaseAuthRepository = impl
+    fun provideFirebaseAuthRepository(impl: FirebaseAuthRepositoryImpl): FirebaseAuthRepository =
+        impl
+
+    @Provides
+    fun provideFirebaseStorageRepository(impl: FirebaseStorageRepositoryImpl): FirebaseStorageRepository =
+        impl
 
     @Provides
     fun provideFirebaseFirestore(): FirebaseFirestore = Firebase.firestore
 
     @Provides
-    fun provideFirestoreRepository(impl: FirebaseFirestoreRepositoryImpl): FirebaseFirestoreRepository = impl
+    fun provideFirebaseStorage(): FirebaseStorage = Firebase.storage
+
+    @Provides
+    fun provideFirestoreRepository(impl: FirebaseFirestoreRepositoryImpl): FirebaseFirestoreRepository =
+        impl
 
     /**
      * Provides BaseUrl as string
@@ -56,6 +69,7 @@ internal class AppModule {
     fun provideBaseURL(): String {
         return BuildConfig.API_URL
     }
+
     /**
      * Provides LoggingInterceptor for api information
      */
@@ -64,6 +78,7 @@ internal class AppModule {
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
+
     /**
      * Provides custom OkkHttp
      */
@@ -80,6 +95,7 @@ internal class AppModule {
         okHttpClient.build()
         return okHttpClient.build()
     }
+
     /**
      * Provides converter factory for retrofit
      */
@@ -88,6 +104,7 @@ internal class AppModule {
     fun provideConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create()
     }
+
     /**
      * Provides ApiServices client for Retrofit
      */
@@ -104,6 +121,7 @@ internal class AppModule {
             .addConverterFactory(converterFactory)
             .build()
     }
+
     /**
      * Provides Api Service using retrofit
      */

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="editBalloonOverlayPadding">5dp</dimen>
+    <dimen name="editBalloonOverlayRadius">20.dp</dimen>
+
+    <dimen name="common_content_padding">20dp</dimen>
+</resources>

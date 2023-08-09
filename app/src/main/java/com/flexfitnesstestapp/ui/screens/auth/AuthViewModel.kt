@@ -12,7 +12,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,8 +28,10 @@ internal class AuthViewModel @Inject constructor(
     val currentUser: FirebaseUser?
         get() = repository.currentUser
 
+    val isLoggedIn = currentUser != null
+
     init {
-        if(repository.currentUser != null){
+        if (repository.currentUser != null) {
             _loginFlow.value = Resource.Success(repository.currentUser!!)
         }
     }
@@ -53,12 +54,13 @@ internal class AuthViewModel @Inject constructor(
         _signupFlow.value = null
     }
 
-    fun getGoogleSignInResult (result: ActivityResult) {
+    fun getGoogleSignInResult(result: ActivityResult) {
         viewModelScope.launch {
+            _loginFlow.value = Resource.Loading
             val signInResult = repository.signInGoogleWithIntent(
                 intent = result.data ?: return@launch
             )
-            Timber.tag("TEST").d(signInResult.toString())
+            _loginFlow.value = signInResult
         }
     }
 
