@@ -1,3 +1,90 @@
 <resources>
+    <!--    Common-->
     <string name="app_name">Flex</string>
+    <string name="menu_alt_text">Menu</string>
+    <string name="no_data">No data to be displayed.</string>
+    <string name="delete">Delete</string>
+    <string name="close">Close</string>
+    <string name="continue_text">Continue</string>
+    <string name="edit">Edit</string>
+    <string name="back">Back</string>
+    <string name="flex_logo_alt_text">Flex logo</string>
+
+    <string name="common_days_quantified">days</string>
+    <string name="common_day_quantified">day</string>
+    <string name="common_per_week">per week</string>
+
+    <!--    Login Screen-->
+    <string name="login_screen_title">Login</string>
+    <string name="login_screen_sign_in_google">Sign in with Google</string>
+    <string name="login_screen_sign_in_other_options">Other options</string>
+    <string name="login_screen_sign_in_policy_start_text">By signing in, you agree to Flex </string>
+    <string name="login_screen_sign_in_privacy_policy">Privacy Policy</string>
+    <string name="login_screen_sign_in_policy_middle_text"> and </string>
+    <string name="login_screen_sign_in_terms_of_use">Terms of Use</string>
+    <string name="login_screen_sign_in_button_text">Sign In</string>
+    <string name="login_screen_sign_in_motto">Fitness simplified.</string>
+
+    <string name="login_screen_email_input_label">Email</string>
+    <string name="login_screen_password_input_label">Password</string>
+
+    <!--    Home Screen-->
+    <string name="home_screen_title">Fitness Profile</string>
+    <string name="home_log_out">Log Out</string>
+
+    <!--    Add Profile Name -->
+    <string name="add_profile_name_title">Your profile info</string>
+    <string name="add_profile_name_subtitle">Your name and profile image will be visible to others on Flex</string>
+    <string name="add_profile_name_edit_button_title">Edit Profile Image</string>
+    <string name="add_profile_name_add_image_alt_text">Click to add an image</string>
+    <string name="add_profile_name_name_field_placeholder">Your Name</string>
+    <string name="add_profile_name__error_tooltip">Please, enter your name</string>
+
+    <!--    Onboarding Screens - Step 1-->
+    <string name="onboarding_step1_title">Select your main fitness goal</string>
+    <string name="onboarding_step1_lose_fat">Lose Fat</string>
+    <string name="onboarding_step1_lose_fat_desc">Burn calories and improve your metabolism.</string>
+
+    <string name="onboarding_step1_build_muscles">Build Muscles</string>
+    <string name="onboarding_step1_build_muscles_desc">Controlled and steady movement to increase muscle mass.</string>
+
+    <string name="onboarding_step1_get_stronger">Get Stronger</string>
+    <string name="onboarding_step1_get_stronger_desc">Increase strength through explosive movements with heavy weights.</string>
+
+    <string name="onboarding_step1_improve_cardio">Improve Cardio</string>
+    <string name="onboarding_step1_improve_cardio_desc">Strengthen your heart and lungs while improving endurance and speed.</string>
+
+    <string name="onboarding_step1_become_flexible">Become Flexible</string>
+    <string name="onboarding_step1_become_flexible_desc">Increase your range of motion through stretches and mobility work.</string>
+
+    <string name="onboarding_step1_general_fitness">General Fitness</string>
+    <string name="onboarding_step1_general_fitness_desc">Become fitter and replace pain through a combination of the above goals.</string>
+
+    <string name="onboarding_step1_info_alt_text">Get more info</string>
+
+    <!--    Onboarding Screens - Step 2-->
+    <string name="onboarding_step2_title">Select your routine style</string>
+    <string name="onboarding_step2_subtitle">Used to suggest more suitable routine</string>
+    <string name="onboarding_step2_button_female">Female</string>
+    <string name="onboarding_step2_button_male">Male</string>
+
+    <!--    Onboarding Screens - Step 3-->
+    <string name="onboarding_step3_title">Where do you commonly work out?</string>
+    <string name="onboarding_step3_button_gym">At a gym</string>
+    <string name="onboarding_step3_button_home">At home</string>
+
+    <!--    Onboarding Screens - Step 4-->
+    <string name="onboarding_step4_title">How often do you want to exercise?</string>
+    <string name="onboarding_step4_subtitle">Used to suggest more suitable routines and set streak goals</string>
+    <string name="onboarding_step4_selector_add_alt_text">Press to increase</string>
+    <string name="onboarding_step4_selector_remove_alt_text">Press to decrease</string>
+
+    <!--    Onboarding Screens - Step 5-->
+    <string name="onboarding_step5_title">Did someone invite you to Flex?</string>
+    <string name="onboarding_step5_button_yes">Yes, I have a referral code.</string>
+    <string name="onboarding_step5_button_no">No.</string>
+    <string name="onboarding_step5_bottom_sheet_title">Enter Your Referral Code</string>
+    <string name="onboarding_step5_bottom_sheet_placeholder">Referral Code</string>
+
+
 </resources>
